@@ -1,3 +1,5 @@
+import { Container, SUbscribe } from "unstated";
+
 class LoginFormContainer extends Container {
   state = {
     name: "",
@@ -11,17 +13,19 @@ class LoginFormContainer extends Container {
   };
 }
 //and on the component side:
-<Subscribe to={[AuthState]}>
-  {({ onInput, state }) => (
-    <Form>
-      {[{ name: "email" }, { name: "password" }].map((field, i) => (
-        <input
-          key={field.name + i}
-          name={field.name}
-          value={state[field.name]}
-          onChange={onChange}
-        />
-      ))}
-    </Form>
-  )}
-</Subscribe>;
+export default = () => (
+  <Subscribe to={[AuthState]}>
+    {({ onInput, state }) => (
+      <Form>
+        {[{ name: "email" }, { name: "password" }].map((field, i) => (
+          <input
+            key={field.name + i}
+            name={field.name}
+            value={state[field.name]}
+            onChange={onChange}
+          />
+        ))}
+      </Form>
+    )}
+  </Subscribe>
+);
